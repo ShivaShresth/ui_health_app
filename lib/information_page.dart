@@ -133,6 +133,7 @@ class _DemoApp1State extends State<DemoApp1> {
                             ],
                           ),
                         ),
+                        
                         AccordionSection(
                           isOpen: _isSecondSectionExpanded,
                           onOpenSection: () {
