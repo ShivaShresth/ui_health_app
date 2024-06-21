@@ -55,8 +55,15 @@ class _DemoApp1State extends State<DemoApp1> {
                       children: [
                         AccordionSection(
                           isOpen: _isFirstSectionExpanded,
-                          onOpenSection: () => setState(() => _isFirstSectionExpanded = true),
-                          onCloseSection: () => setState(() => _isFirstSectionExpanded = false),
+                          onOpenSection: () =>setState(() {
+                              _isFirstSectionExpanded = true;
+                    _isSecondSectionExpanded = false; 
+                          }),
+                             
+                              
+                              
+                          onCloseSection: () =>
+                              setState(() => _isFirstSectionExpanded = false),
                           headerBackgroundColor: Colors.blue.shade600,
                           contentBackgroundColor: Colors.blue.shade200,
                           rightIcon: const Icon(Icons.arrow_back),
@@ -82,8 +89,7 @@ class _DemoApp1State extends State<DemoApp1> {
                                   setState(() {
                                     _isChecked1 = "Yes";
                                     _isSecondSectionExpanded = true;
-                                                                        _isFirstSectionExpanded=false;
-
+                                   // _isFirstSectionExpanded = false;
                                   });
                                 },
                                 child: Row(
@@ -133,15 +139,19 @@ class _DemoApp1State extends State<DemoApp1> {
                             ],
                           ),
                         ),
-                        
                         AccordionSection(
                           isOpen: _isSecondSectionExpanded,
                           onOpenSection: () {
-                            if (widget.isFirstSectionSelected) {
-                              setState(() => _isSecondSectionExpanded = true);
-                            }
+                            setState(() {
+                    _isSecondSectionExpanded = true;
+                    _isFirstSectionExpanded = false; // Close first section when opening second
+                  });
+                            // if (widget.isFirstSectionSelected) {
+                            //   setState(() => _isSecondSectionExpanded = true);
+                            // }
                           },
-                          onCloseSection: () => setState(() => _isSecondSectionExpanded = false),
+                          onCloseSection: () =>
+                              setState(() => _isSecondSectionExpanded = false),
                           headerBackgroundColor: widget.isFirstSectionSelected
                               ? Colors.amber
                               : Colors.grey,
@@ -270,11 +280,16 @@ class _DemoApp1State extends State<DemoApp1> {
                         AccordionSection(
                           isOpen: _isThirdSectionExpanded,
                           onOpenSection: () {
-                            if (widget.secondSectionSelected) {
-                              setState(() => _isThirdSectionExpanded = true);
-                            }
+                            setState(() {
+                              _isThirdSectionExpanded=true;
+                              _isSecondSectionExpanded = false;
+                            });
+                            // if (widget.secondSectionSelected) {
+                            //   setState(() => _isThirdSectionExpanded = true);
+                            // }
                           },
-                          onCloseSection: () => setState(() => _isThirdSectionExpanded = false),
+                          onCloseSection: () =>
+                              setState(() => _isThirdSectionExpanded = false),
                           headerBackgroundColor: widget.secondSectionSelected
                               ? Colors.red
                               : Colors.grey,

@@ -113,6 +113,7 @@ SizedBox(height: 16,),
             ),
                   Expanded(
               child: PageView(
+                physics:const NeverScrollableScrollPhysics(),
                 controller: _pageController,
                 children: List.generate(6, (index) {
                   // Define the pages for the PageView here
