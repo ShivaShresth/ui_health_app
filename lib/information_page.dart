@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:accordion/accordion.dart';
+import 'package:ui_health_app/homepage.dart';
 
 class DemoApp1 extends StatefulWidget {
   final bool isFirstSectionSelected;
@@ -31,6 +32,7 @@ class _DemoApp1State extends State<DemoApp1> {
   bool _isFirstSectionExpanded = false;
   bool _isSecondSectionExpanded = false;
   bool _isThirdSectionExpanded = false;
+  bool _button = false;
 
   @override
   void initState() {
@@ -55,13 +57,10 @@ class _DemoApp1State extends State<DemoApp1> {
                       children: [
                         AccordionSection(
                           isOpen: _isFirstSectionExpanded,
-                          onOpenSection: () =>setState(() {
-                              _isFirstSectionExpanded = true;
-                    _isSecondSectionExpanded = false; 
+                          onOpenSection: () => setState(() {
+                            _isFirstSectionExpanded = true;
+                            _isSecondSectionExpanded = false;
                           }),
-                             
-                              
-                              
                           onCloseSection: () =>
                               setState(() => _isFirstSectionExpanded = false),
                           headerBackgroundColor: Colors.blue.shade600,
@@ -89,7 +88,7 @@ class _DemoApp1State extends State<DemoApp1> {
                                   setState(() {
                                     _isChecked1 = "Yes";
                                     _isSecondSectionExpanded = true;
-                                   // _isFirstSectionExpanded = false;
+                                    // _isFirstSectionExpanded = false;
                                   });
                                 },
                                 child: Row(
@@ -112,7 +111,7 @@ class _DemoApp1State extends State<DemoApp1> {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  widget.onChangedFirst(false);
+                                  widget.onChangedFirst(true);
                                   setState(() {
                                     _isChecked1 = "NO";
                                     _isSecondSectionExpanded = true;
@@ -125,7 +124,7 @@ class _DemoApp1State extends State<DemoApp1> {
                                       value: "NO",
                                       groupValue: _isChecked1,
                                       onChanged: (value) {
-                                        widget.onChangedFirst(false);
+                                        widget.onChangedFirst(true);
                                         setState(() {
                                           _isChecked1 = value!;
                                           _isSecondSectionExpanded = true;
@@ -143,9 +142,10 @@ class _DemoApp1State extends State<DemoApp1> {
                           isOpen: _isSecondSectionExpanded,
                           onOpenSection: () {
                             setState(() {
-                    _isSecondSectionExpanded = true;
-                    _isFirstSectionExpanded = false; // Close first section when opening second
-                  });
+                              _isSecondSectionExpanded = true;
+                              _isFirstSectionExpanded =
+                                  false; // Close first section when opening second
+                            });
                             // if (widget.isFirstSectionSelected) {
                             //   setState(() => _isSecondSectionExpanded = true);
                             // }
@@ -281,7 +281,7 @@ class _DemoApp1State extends State<DemoApp1> {
                           isOpen: _isThirdSectionExpanded,
                           onOpenSection: () {
                             setState(() {
-                              _isThirdSectionExpanded=true;
+                              _isThirdSectionExpanded = true;
                               _isSecondSectionExpanded = false;
                             });
                             // if (widget.secondSectionSelected) {
@@ -322,6 +322,7 @@ class _DemoApp1State extends State<DemoApp1> {
                                     widget.onChangedThird(true);
                                     setState(() {
                                       _week = "Never";
+                                      _button = true;
                                     });
                                   }
                                 },
@@ -338,6 +339,7 @@ class _DemoApp1State extends State<DemoApp1> {
                                           widget.onChangedThird(true);
                                           setState(() {
                                             _week = value!;
+                                            _button = true;
                                           });
                                         }
                                       },
@@ -352,6 +354,7 @@ class _DemoApp1State extends State<DemoApp1> {
                                     widget.onChangedThird(true);
                                     setState(() {
                                       _week = "Once a week";
+                                      _button = true;
                                     });
                                   }
                                 },
@@ -368,6 +371,7 @@ class _DemoApp1State extends State<DemoApp1> {
                                           widget.onChangedThird(true);
                                           setState(() {
                                             _week = value!;
+                                            _button = true;
                                           });
                                         }
                                       },
@@ -382,6 +386,7 @@ class _DemoApp1State extends State<DemoApp1> {
                                     widget.onChangedThird(true);
                                     setState(() {
                                       _week = "2-3 times a week";
+                                      _button = true;
                                     });
                                   }
                                 },
@@ -398,6 +403,8 @@ class _DemoApp1State extends State<DemoApp1> {
                                           widget.onChangedThird(true);
                                           setState(() {
                                             _week = value!;
+                                                                                  _button = true;
+
                                           });
                                         }
                                       },
@@ -415,6 +422,10 @@ class _DemoApp1State extends State<DemoApp1> {
                 ),
               ),
             ),
+            (_button == true) ?MaterialButton(onPressed: (){
+              HomePage(h1: 1,);
+              // Navigator.push(context,MaterialPageRoute(builder: (context)=>DemoApp2()));
+            },child: Text("Next"),) : SizedBox(),
           ],
         ),
       ),
