@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:infinite_carousel/infinite_carousel.dart';
+import 'detail_screen.dart'; // Adjust the import as necessary
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -43,6 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
     controller.dispose(); // Dispose the controller to avoid memory leaks
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,55 +68,66 @@ class _MyHomePageState extends State<MyHomePage> {
           axisDirection: Axis.horizontal,
           loop: true,
           itemBuilder: (context, itemIndex, realIndex) {
-            double scaleFactor = (1 - (0.2 * (itemIndex - selectedIndex).abs()))
-                .clamp(0.8, 1.0);
+            double scaleFactor =
+                (1 - (0.2 * (itemIndex - selectedIndex).abs())).clamp(0.8, 1.0);
 
             return Center(
               child: Transform.scale(
                 scale: scaleFactor,
-                child: Stack(
-                  children: [
-                    // Background image with rounded corners
-                    Container(
-                      width: double.infinity,
-                      height: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        image: DecorationImage(
-                          image: AssetImage(imageList[itemIndex]["image_path"]!),
-                          fit: BoxFit.cover,
+                child: GestureDetector(
+                  onTap: () {
+                    print("hello");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailScreen(
+                          images: [imageList[itemIndex]["image_path"]!],
                         ),
-                        
                       ),
-                    ),
+                    );
+                  },
+                  child: Stack(
+                    children: [
+                      // Background image with rounded corners
+                      Container(
+                        width: double.infinity,
+                        height: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.pink,
+                          borderRadius: BorderRadius.circular(20),
+                          image: DecorationImage(
+                            image: AssetImage(imageList[itemIndex]["image_path"]!),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
 
-                    // Gradient border using a separate container
-                    Container(
-                      width: double.infinity,
-                      height: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color:Colors.transparent, // Make border invisible
-                        ),
-                      ),
-                      child: Container(
+                      // Gradient border using a separate container
+                      Container(
                         width: double.infinity,
                         height: double.infinity,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              Colors.red.withOpacity(0.5),
-                              Colors.green.withOpacity(0.2),
-                            ],
+                          border: Border.all(
+                            color: Colors.black, // Make border invisible
+                          ),
+                        ),
+                        child: Container(
+                          width: double.infinity,
+                          height: double.infinity,
+                          decoration: BoxDecoration(
+                            border: const GradientBoxBorder(
+                              gradient: LinearGradient(
+                                colors: [Colors.blue, Colors.red],
+                              ),
+                              width: 2,
+                            ),
+                            borderRadius: BorderRadius.circular(20),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ui_health_app/homepage.dart';
-import 'package:ui_health_app/slider.dart';
+import 'package:ui_health_app/slider/slider.dart';
 
 void main() {
   runApp(const MyApp());
