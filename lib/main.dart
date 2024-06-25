@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ui_health_app/homepage.dart';
+import 'package:ui_health_app/slider/slider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +14,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
     
-      home: HomePage(),
+      home: MyHomePage(title: "Slider",),
+   //  home:HomePage()
     );
   }
 }
